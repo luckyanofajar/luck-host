@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>Pengaturan Akun</h2>
+        
+        <label for="username">Nama Pengguna:</label>
+        <input type="text" id="username" value="User123" required>
+        
+        <label for="password">Password Baru:</label>
+        <input type="password" id="password" placeholder="Masukkan password baru">
+        
+        <label for="language">Pilih Bahasa:</label>
+        <select id="language">
+            <option value="id">Bahasa Indonesia</option>
+            <option value="en">English</option>
+        </select>
+        
+        <button onclick="updateSettings()">Simpan Perubahan</button>
+    </div>
+    
+    <script>
+        function updateSettings() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let language = document.getElementById("language").value;
+            
+            alert("Pengaturan berhasil diperbarui!\nNama: " + username + "\nBahasa: " + (language === 'id' ? 'Bahasa Indonesia' : 'English'));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Favicons -->
+    <link href="assets/img/Logo_Teknologi___Gaming_Biru__1_-removebg-preview.png" rel="icon">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>My<span class="highlight">Int</span></h2>
+            <p>Pelaporan Kerusakan Fasilitas Kampus</p>
+        </div>
+
+            <form id="reportForm" action="assets/forms/proses_laporan.php" method="POST" enctype="multipart/form-data">
+
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+
+            <label for="lokasi">Lokasi Kerusakan:</label>
+            <input type="text" id="lokasi" placeholder="Contoh: Lab Komputer 1" required>
+
+            <label for="jenis">Jenis Kerusakan:</label>
+            <select id="jenis" required>
+                <option value="">Pilih Jenis</option>
+                <option value="Monitor">Monitor</option>
+                <option value="CPU">CPU</option>
+                <option value="Keyboard">Keyboard</option>
+                <option value="Mouse">Mouse</option>
+                <option value="Proyektor">Proyektor</option>
+                <option value="Layar Proyektor">Layar Proyektor</option>
+                <option value="Switch">Switch</option>
+                <option value="Terminal">Terminal</option>
+                <option value="AC">AC</option>
+                <option value="Papan tulis">Papan tulis</option>
+            </select>
+
+            <label for="deskripsi">Deskripsi Kerusakan:</label>
+            <textarea id="deskripsi" placeholder="Jelaskan kerusakan yang terjadi" required></textarea>
+
+            <label for="foto">Unggah Foto:</label>
+            <input type="file" id="foto" accept="image/*">
+
+            <button type="submit">Kirim Laporan</button>
+        </form>
+
+        <!-- Notifikasi Animasi -->
+        <div id="notifSuccess" class="notif">
+            ✅ Laporan Berhasil Dikirim! Terima kasih telah melaporkan.
+        </div>
+
+        <!-- Tombol Navigasi -->
+        <div class="footer">
+            <button onclick="window.location.href=('laporan.html')">Lihat Laporan</button>
+            <button onclick="navigate('rumah.html')">Home</button>
+            <button onclick="navigate('set.html')">Setting</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("reportForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            let nama = document.getElementById("nama").value.trim();
+            let lokasi = document.getElementById("lokasi").value.trim();
+            let jenis = document.getElementById("jenis").value;
+            let deskripsi = document.getElementById("deskripsi").value.trim();
+            let foto = document.getElementById("foto").files[0];
+
+            if (!jenis) {
+                alert("⚠️ Pilih jenis kerusakan!");
+                return;
+            }
+
+            if (foto && !foto.type.startsWith("image/")) {
+                alert("⚠️ Hanya gambar yang diperbolehkan!");
+                return;
+            }
+
+            // Menampilkan Notifikasi Animasi
+            let notif = document.getElementById("notifSuccess");
+            notif.style.display = "block";
+
+            setTimeout(() => {
+                notif.style.display = "none";
+            }, 3000); // Notifikasi hilang setelah 3 detik
+
+            // Reset Form
+            document.getElementById("reportForm").reset();
+        });
+
+        function navigate(page) {
+            window.location.href = page;
+        }
+    </script>
+
+    <style>
+        .notif {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lihat Laporan</title>
+    <link rel="stylesheet" href="assets/css/main.css"> <!-- Tambahkan CSS kalau ada -->
+</head>
+<body>
+    <h2>Laporan Kerusakan Fasilitas Kampus</h2>
+    <input type="text" id="search" placeholder="Cari laporan..." onkeyup="filterLaporan()">
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Lokasi</th>
+                <th>Jenis</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="laporanBody">
+            <!-- Data laporan akan dimasukkan di sini pakai JavaScript -->
+        </tbody>
+    </table>
+    
+    <script>
+        // Contoh data laporan (nanti bisa diambil dari database pakai PHP/AJAX)
+        let laporan = [
+            {nama: "Rizky", lokasi: "Lab Komputer 1", jenis: "Komputer", status: "Diproses"},
+            {nama: "Siti", lokasi: "Ruang Kelas A1", jenis: "Meja Rusak", status: "Selesai"}
+        ];
+        
+        function loadLaporan() {
+            let tableBody = document.getElementById("laporanBody");
+            tableBody.innerHTML = "";
+            laporan.forEach((lapor, index) => {
+                let row = `<tr>
+                    <td>${lapor.nama}</td>
+                    <td>${lapor.lokasi}</td>
+                    <td>${lapor.jenis}</td>
+                    <td>${lapor.status}</td>
+                    <td><button onclick="lihatDetail(${index})">Detail</button></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+        
+        function filterLaporan() {
+            let keyword = document.getElementById("search").value.toLowerCase();
+            let filtered = laporan.filter(lapor => 
+                lapor.nama.toLowerCase().includes(keyword) ||
+                lapor.lokasi.toLowerCase().includes(keyword) ||
+                lapor.jenis.toLowerCase().includes(keyword) ||
+                lapor.status.toLowerCase().includes(keyword)
+            );
+            let tableBody = document.getElementById("laporanBody");
+            tableBody.innerHTML = "";
+            filtered.forEach((lapor, index) => {
+                let row = `<tr>
+                    <td>${lapor.nama}</td>
+                    <td>${lapor.lokasi}</td>
+                    <td>${lapor.jenis}</td>
+                    <td>${lapor.status}</td>
+                    <td><button onclick="lihatDetail(${index})">Detail</button></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+        
+        function lihatDetail(index) {
+            alert(`Detail Laporan:\nNama: ${laporan[index].nama}\nLokasi: ${laporan[index].lokasi}\nJenis: ${laporan[index].jenis}\nStatus: ${laporan[index].status}`);
+        }
+        
+        window.onload = loadLaporan;
+    </script>
+</body>
+</html>

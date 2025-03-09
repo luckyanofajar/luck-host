@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyInt</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Favicons -->
+    <link href="assets/img/Logo_Teknologi___Gaming_Biru__1_-removebg-preview.png" rel="icon">
+</head>
+<body>
+    <div class="container">
+        <h2>My<span style="color: blue;">Int</span></h2>
+        <p>Pelaporan kerusakan fasilitas kampus</p>
+        <h3>Login yuk!</h3>
+
+        <form id="loginForm">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" placeholder="Masukkan email" required>
+            
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" placeholder="Masukkan password" required>
+            
+            <button type="submit" class="btn">Masuk</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='register.html'">Daftar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            
+            if (email === "user@gmail.com" && password === "123456") { 
+                alert("Login berhasil!");
+                window.location.href = "home.html";
+            } else {
+                alert("Email atau password salah!"); 
+            }
+        });
+    </script>
+</body>
+</html>
